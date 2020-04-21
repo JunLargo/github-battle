@@ -19,7 +19,7 @@ export default class Popular extends React.Component {
 
     render() {
         
-        const languages = ['All', 'JavaScript', 'Java', 'CSS', 'Python']
+        const languages = ['All', 'JavaScript', 'Java', 'CSS', 'Python', 'C++']
         return(
             <ul className = 'flex-center'>
                 {languages.map((language) => (
@@ -27,7 +27,7 @@ export default class Popular extends React.Component {
                         <button 
                         className ='btn-clear nav-link'
                         style = {language === this.state.selectedLanguage 
-                        ? {color: 'purple'}
+                        ? {color: 'blue'}
                         : null}
                         onClick = {() => this.updateLanguage(language)}>
                             {language}
