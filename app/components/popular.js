@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { fetchPopularRepos } from '../utils/api'
 
 function LanguagesNav({selected, onUpdateLanguge}) {
-   const languages = ['All', 'JavaScript', 'Java', 'CSS', 'Ruby', 'Python', 'C++']
+   const languages = ['All', 'JavaScript', 'Java', 'CSS', 'Ruby', 'Python']
       return(
          <ul className = 'flex-center'>
                {languages.map((language) => (
@@ -40,6 +40,10 @@ export default class Popular extends React.Component {
 
             this.updateLanguage = this.updateLanguage.bind(this)
             this.isLoading = this.isLoading.bind(this)
+        }
+
+        componentDidMount() {
+           this.updateLanguage(this.state.selectedLanguage)
         }
 
         updateLanguage(selectedLanguage) {
