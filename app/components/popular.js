@@ -88,3 +88,6 @@ export default class Popular extends React.Component {
       )
    }
 }
+
+
+//# see JS fetch API
