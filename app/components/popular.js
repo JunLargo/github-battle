@@ -2,6 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { fetchPopularRepos } from "../utils/api"
 import { FaUser, FaStar, FaCodeBranch, FaExclamationTriangle } from "react-icons/fa"
+import { render } from "react-dom"
 
 function LanguagesNav({ selected, onUpdateLanguge }) {
   const languages = ["All", "JavaScript", "Java", "CSS", "Ruby", "Python"]
@@ -68,12 +69,15 @@ ReposGrid.propTypes = {
   repos: PropTypes.array.isRequired
 }
 
+
+//create a component to fetch popular github repositories based on the selected language
+
 export default class Popular extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      selectedLanguage: "All",
+      selectedLanguage: 'All',
       repos: {},
       error: null
     }
@@ -91,10 +95,9 @@ export default class Popular extends React.Component {
       selectedLanguage,
       error: null
     })
-
     if (!this.state.repos[selectedLanguage]) {
       fetchPopularRepos(selectedLanguage)
-        .then(data => {
+        .then((data) => {
           this.setState(({ repos }) => ({
             repos: {
               ...repos,
@@ -102,10 +105,10 @@ export default class Popular extends React.Component {
             }
           }))
         })
-        .catch(() => {
-          console.warn("Error fetching repos: ", error)
+        .catch((err) => {
+          console.warn('Error fetching repos ', err)
           this.setState({
-            error: "There was an error fetching the repositories."
+            error: 'There was error fetching repositories.'
           })
         })
     }
@@ -120,11 +123,13 @@ export default class Popular extends React.Component {
     const { selectedLanguage, repos, error } = this.state
     return (
       <React.Fragment>
-        <LanguagesNav selected={selectedLanguage} onUpdateLanguge={this.updateLanguage} />
-
-        {this.isLoading() && <p>Loading...</p>}
+        <LanguagesNav
+          selected={selectedLanguage}
+          onUpdateLanguge={this.updateLanguage}
+        />
+        {this.isLoading() && <p>Loading....</p>}
         {error && <p>{error}</p>}
-        {repos[selectedLanguage] && <ReposGrid repos={repos[selectedLanguage]} />}
+        {repos[selectedLanguage] && <pre>{JSON.stringify(repos, null, 2)}</pre>}
       </React.Fragment>
     )
   }
