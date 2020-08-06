@@ -121,7 +121,7 @@ export default class Battle extends React.Component {
       playerTwo: null,
     }
 
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmit = thicles.handleSubmit.bind(this)
     this.handleReset = this.handleReset.bind(this)
   }
 
